@@ -12,16 +12,15 @@ body {
     padding: 20px;
 }
 .site-header {
-    background: #051e66;   /* blue color */
+    background: #051e66;
     color: white;
     text-align: center;
-    font-size: 26px;       /* decent size */
+    font-size: 26px;
     font-weight: bold;
     padding: 15px;
-    margin-bottom: 20px;
+    margin: 0 -20px 20px -20px; /* fixes alignment */
     border-radius: 0 0 10px 10px;
 }
-
 h1 {
     text-align: center;
 }
@@ -60,6 +59,7 @@ button:hover {
     align-items: center;
     justify-content: space-between;
     gap: 15px;
+    flex-wrap: wrap;
 }
 
 #count {
@@ -68,14 +68,15 @@ button:hover {
     font-weight: bold;
 }
 
+/* Center the title properly */
 .top-bar h1 {
-    text-align: center;
     margin: 0;
+    font-size: 28px;
+    flex: 1;
+    text-align: center;
 }
 
 .print-btn {
-    grid-column: 3;
-    justify-self: end;
     padding: 10px 15px;
     border: none;
     border-radius: 8px;
@@ -120,8 +121,6 @@ button:hover {
 }
 
 .print-section {
-    grid-column: 3;
-    justify-self: end;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -139,8 +138,6 @@ button:hover {
 }
 
 .clear-btn {
-    grid-column: 1;
-    justify-self: start;
     padding: 10px 15px;
     border: none;
     border-radius: 8px;
@@ -161,6 +158,7 @@ button:hover {
     .meal-btn,
     h1 {
         display: none !important;
+	text-align: center;
     }
 
     .site-header {
@@ -172,12 +170,11 @@ button:hover {
         font-size: 10pt;
     }
 
-    #printHeader {
-        display: block !important;
-        text-align: center;
-        margin-bottom: 10px;
-        column-span: all;
-    }
+#printHeader {
+    display: block !important;
+    text-align: center;
+    margin-bottom: 10px;
+}
 
     #printName {
         font-size: 20px;
