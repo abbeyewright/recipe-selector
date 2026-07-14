@@ -69,7 +69,6 @@ button:hover {
 }
 
 .top-bar h1 {
-    grid-column: 2;
     text-align: center;
     margin: 0;
 }
@@ -157,7 +156,7 @@ button:hover {
 @media print {
 
     .top-bar,
-    .controls,
+    .categories,
     button,
     .meal-btn,
     h1 {
@@ -165,44 +164,40 @@ button:hover {
     }
 
     .site-header {
-       *display: none !important;
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        font-size: 10pt;
+    }
+
+    #printHeader {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 10px;
+        column-span: all;
+    }
+
+    #printName {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    #recipeContainer {
+        column-count: 2;
+        column-gap: 20px;
     }
 
     .recipe {
         display: none !important;
     }
 
-    body {
-        column-count: 2;
-        column-gap: 25px;  /* space between columns */
-    }
-
-    /* Keep each recipe from splitting across columns */
     .recipe.print-show {
         display: block !important;
         break-inside: avoid;
         page-break-inside: avoid;
-        margin-bottom: 15px;
-    }
-
-    body {
-        background: white;
-    }
-
-    #printHeader {
-        display: block !important;
-        text-align: center;
-        margin-bottom: 5px;
-	column-span: all;
-    }
-
-    #printName {
-        display: block !important;
-        font-size: 20px;
-        margin: 0;
-    }
-    body {
-        font-size: 8pt;
+        margin-bottom: 10px;
     }
 }
 
