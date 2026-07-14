@@ -152,40 +152,45 @@ button:hover {
 
 @media print {
 
+    /* Hide UI elements */
     .top-bar,
     .categories,
     button,
-    .meal-btn,
+    .meal-btn {
+        display: none !important;
+    }
+
+    /* DO NOT hide all h1s globally */
     h1 {
-        display: none !important;
-	text-align: center;
+        text-align: center;
     }
 
-    .site-header {
-        display: none !important;
+    /* Show print header */
+    #printHeader {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 10px;
     }
-
-    body {
-        background: white;
-        font-size: 10pt;
-    }
-
-#printHeader {
-    display: block !important;
-    text-align: center;
-    margin-bottom: 10px;
-}
 
     #printName {
         font-size: 20px;
         margin: 0;
     }
 
+    /* Ensure header content prints */
+    #count {
+        display: block !important;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    /* Columns only for recipes */
     #recipeContainer {
         column-count: 2;
         column-gap: 20px;
     }
 
+    /* Hide all recipes except selected */
     .recipe {
         display: none !important;
     }
@@ -195,6 +200,12 @@ button:hover {
         break-inside: avoid;
         page-break-inside: avoid;
         margin-bottom: 10px;
+    }
+
+    body {
+        background: white;
+        font-size: 10pt;
+        margin: 0;
     }
 }
 
@@ -235,7 +246,9 @@ button:hover {
 </div>
 
 <div id="printHeader">
-    <h1 id="printName"></h1>
+    <h1>Deseret Farms Food Pantry Recipes</h1>
+    <h2 id="printName"></h2>
+    <div id="printCount"></div>
 </div>
 
 <div id="breakfast" class="category">
@@ -523,6 +536,7 @@ button:hover {
     <p>Fry eggs. Toast the bread and spread butter over toast. Serve eggs and toast with Milk. Enjoy!</p>
 </div>
 
+<div id="recipeContainer">
 <div id="egg & cheese breakfast" class="recipe">
     <h2>Egg & Cheese Breakfast</h2>
     <h3>Ingredients</h3>
@@ -1458,6 +1472,7 @@ button:hover {
     <h3>Instructions</h3>
     <p>Dice the onion and add it to an oven-safe pan along with the butter. Cook over medium heat until the onions are soft. Add chicken to the pan and season to your liking. Add water/broth to pan, add the rice, and stir. Plat a lid on the pan, turn heat up to medium-high, and allow the broth to come to a boil. Once it boils, turn the heat down to low and let the pan simmer for 15 mins. Stir in the carrots, and let it sit over medium-low heat for another 5 mins. Turn on the oven's broiler, top the pan with shredded cheese, and place the pan in the oven under the broiler for a few minutes to melt the cheese. Enjoy!</p>
 </div>
+</div>
 
 <script>
 const cart = [];
@@ -1486,6 +1501,9 @@ function printRecipes() {
     document.querySelectorAll('.recipe').forEach(r => {
         r.classList.remove('print-show');
     });
+
+document.getElementById("printCount").innerText =
+    cart.length + " meals selected";
 
     order.forEach(cat => {
         cart.forEach(meal => {
