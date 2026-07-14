@@ -189,10 +189,11 @@ button:hover {
         display: block !important;
         text-align: center;
         margin-bottom: 10px;
+        margin: 0 0 5px 0 !important;
     }
 
     #printName {
-        font-size: 20px;
+        font-size: 16px;
         margin: 0;
     }
 
@@ -200,6 +201,8 @@ button:hover {
     #count {
         display: block !important;
         font-weight: bold;
+	font-size: 12pt
+	margin: 0
         margin-bottom: 5px;
     }
 
@@ -225,10 +228,10 @@ button:hover {
 
     .recipe.print-show h2,    
     .recipe.print-show h3,    
-    .recipe.print-show ul,  
-    .recipe.print-show p {       
-    margin: 0 !important;     
-    padding: 0 !important;    
+.recipe.print-show ul {
+    margin: 4px 0 6px 18px !important;  /* restores natural spacing */
+    padding-left: 18px !important;      /* fixes bullet alignment */
+    list-style-position: outside;
 }
 
     body {
