@@ -11,6 +11,16 @@ body {
     margin: 0;
     padding: 20px;
 }
+.site-header {
+    background: #1f4ed8;   /* blue color */
+    color: white;
+    text-align: center;
+    font-size: 26px;       /* decent size */
+    font-weight: bold;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 0 0 10px 10px;
+}
 
 h1 {
     text-align: center;
@@ -147,6 +157,10 @@ button:hover {
         display: none !important;
     }
 
+    .site-header {
+       *display: none !important;
+    }
+
     .recipe {
         display: none !important;
     }
@@ -182,6 +196,9 @@ button:hover {
 </head>
 
 <body>
+<div class="site-header">
+    Deseret Farms Food Pantry Recipes
+</div>
 <h3 id="count">0 meals selected</h3>
 
 <div class="top-bar">
