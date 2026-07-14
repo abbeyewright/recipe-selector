@@ -56,9 +56,16 @@ button:hover {
 }
 
 .top-bar {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+#count {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .top-bar h1 {
@@ -165,11 +172,17 @@ button:hover {
         display: none !important;
     }
 
+    body {
+        column-count: 2;
+        column-gap: 25px;  /* space between columns */
+    }
+
+    /* Keep each recipe from splitting across columns */
     .recipe.print-show {
         display: block !important;
-        margin-left: 20px;
-        display: block !important;       
-	margin: 5px; /* bottom spacing between recipes */
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin-bottom: 15px;
     }
 
     body {
@@ -180,6 +193,7 @@ button:hover {
         display: block !important;
         text-align: center;
         margin-bottom: 5px;
+	column-span: all;
     }
 
     #printName {
