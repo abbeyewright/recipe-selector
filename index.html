@@ -76,7 +76,7 @@ button:hover {
 .top-bar {
     display: flex;
     align-items: center;
-    justify-content: space-betweent; /* change this */
+    justify-content: space-between; /* change this */
     position: relative;         /* important */
     gap: 15px;
     flex-wrap: wrap;
@@ -183,16 +183,10 @@ button:hover {
         display: none !important;
     }
 
-    /* DO NOT hide all h1s globally */
-    h1 {
-        text-align: center;
-    }
-
-    /* Show print header */
+    /* Header */
     #printHeader {
         display: block !important;
         text-align: center;
-        margin-bottom: 10px;
         margin: 0 0 5px 0 !important;
     }
 
@@ -201,23 +195,39 @@ button:hover {
         margin: 0;
     }
 
-    /* Ensure header content prints */
     #count {
         display: block !important;
         font-weight: bold;
-	font-size: 12pt
-	margin: 0
-        margin-bottom: 5px;
+        font-size: 12pt;
+        margin: 0 0 5px 0;
     }
 
-@media print {
-
+    /* ✅ FORCE 2 COLUMNS */
     #recipeContainer {
         column-count: 2 !important;
-        column-gap: 15px;
+        column-gap: 15px !important;
         column-fill: balance;
     }
 
+    /* Hide all recipes except selected */
+    .recipe {
+        display: none !important;
+    }
+
+    .recipe.print-show {
+        display: block !important;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        margin: 0 0 4px 0 !important;
+        padding: 6px 8px !important;
+        width: 100%;
+    }
+
+    body {
+        background: white;
+        font-size: 10pt;
+        margin: 0;
+    }
 }
 
     /* Hide all recipes except selected */
@@ -563,6 +573,8 @@ button:hover {
     </button>
 </div>
 
+<div id="recipeContainer">
+
 <div id="egg breakfast" class="recipe">
     <h2>Egg Breakfast</h2>
 
@@ -594,8 +606,6 @@ button:hover {
         Fría los huevos. Toste el pan y unte mantequilla sobre el pan. Sirva los huevos y el pan con leche. ¡Disfrute!
     </p>
 </div>
-
-<div id="recipeContainer">
 
 <div id="egg & cheese breakfast" class="recipe">
 
