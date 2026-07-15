@@ -1533,7 +1533,7 @@ const translations = {
     "Hot Dogs": "Perros Calientes",
     "Chili Dogs": "Hot Dogs con chili",
     "Cheese Quesadilla": "Quesadilla de Queso",
-    "Bean Quesadilla": "Quesadilla de Frijoles"
+    "Bean Quesadilla": "Quesadilla de Frijoles",
     "Chicken and Cheese Quesadilla": "Quesadilla de pollo y queso",
     "Beef Quesadilla": "Quesadilla de res",
     "Baked Potato with Cheese and Beans": "Papa horneada con queso y frijoles",
@@ -1607,12 +1607,19 @@ function toggleMeal(meal, category, button) {
 }
 
 function printRecipes() {
-    updateRecipeLanguage();  // ✅ ensure correct language shown
-    window.print();
-}
+    updateRecipeLanguage();
 
-document.getElementById("printCount").innerText =
-    cart.length + " meals selected";
+    const name = document.getElementById("customerName").value;
+    document.getElementById("printName").innerText = name;
+
+    document.getElementById("printCount").innerText =
+        cart.length + " meals selected";
+
+    const order = ["breakfast", "lunch", "dinner"];
+
+    document.querySelectorAll('.recipe').forEach(r => {
+        r.classList.remove('print-show');
+    });
 
     order.forEach(cat => {
         cart.forEach(meal => {
@@ -1624,9 +1631,6 @@ document.getElementById("printCount").innerText =
             }
         });
     });
-
-    const name = document.getElementById("customerName").value;
-    document.getElementById("printName").innerText = name;
 
     window.print();
 }
