@@ -208,11 +208,15 @@ button:hover {
         margin-bottom: 5px;
     }
 
-    /* Columns only for recipes */
+@media print {
+
     #recipeContainer {
-        column-count: 2;
-        column-gap: 20px;
+        column-count: 2 !important;
+        column-gap: 15px;
+        column-fill: balance;
     }
+
+}
 
     /* Hide all recipes except selected */
     .recipe {
@@ -226,6 +230,7 @@ button:hover {
         margin-bottom: 10px;
         margin: 0 0 4px 0 !important;
         padding: 6px 8px !important;
+	width: 100%;
     }
 
     .recipe.print-show h2,    
@@ -1229,6 +1234,7 @@ function toggleMeal(meal, category, button) {
 }
 
 function printRecipes() {
+
     updateRecipeLanguage();
 
     const name = document.getElementById("customerName").value;
@@ -1237,11 +1243,12 @@ function printRecipes() {
     document.getElementById("printCount").innerText =
         cart.length + " meals selected";
 
-    const order = ["breakfast", "lunch", "dinner"];
-
+    // Remove all print classes first
     document.querySelectorAll('.recipe').forEach(r => {
         r.classList.remove('print-show');
     });
+
+    const order = ["breakfast", "lunch", "dinner"];
 
     order.forEach(cat => {
         cart.forEach(meal => {
@@ -1319,9 +1326,6 @@ function showRecipes() {
     // show only selected ones
     cart.forEach(meal => {
         const el = document.getElementById(meal);
-        if (el) {
-            el.style.display = 'block';
-        }
     });
 }
 </script>
