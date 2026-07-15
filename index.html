@@ -76,7 +76,8 @@ button:hover {
 .top-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start; /* change this */
+    position: relative;         /* important */
     gap: 15px;
     flex-wrap: wrap;
 }
@@ -87,11 +88,12 @@ button:hover {
     font-weight: bold;
 }
 
-/* Center the title properly */
 .top-bar h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     margin: 0;
     font-size: 28px;
-    flex: 1;
     text-align: center;
 }
 
