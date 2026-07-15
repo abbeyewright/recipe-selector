@@ -175,7 +175,7 @@ button:hover {
 
 @media print {
 
-    /* Hide UI elements */
+    /* Hide UI */
     .top-bar,
     .categories,
     button,
@@ -195,63 +195,33 @@ button:hover {
         margin: 0;
     }
 
-    #count {
-        display: block !important;
+    #printCount {
         font-weight: bold;
         font-size: 12pt;
         margin: 0 0 5px 0;
     }
 
-    /* ✅ FORCE 2 COLUMNS */
+    /* ✅ FORCE EXACTLY 2 COLUMNS */
     #recipeContainer {
         column-count: 2 !important;
         column-gap: 15px !important;
         column-fill: balance;
     }
 
-    /* Hide all recipes except selected */
+    /* Hide all recipes */
     .recipe {
         display: none !important;
     }
 
+    /* Show selected recipes */
     .recipe.print-show {
-        display: block !important;
-        break-inside: avoid;
-        page-break-inside: avoid;
+       *display: block !important;
+       *break-inside: avoid;
+        page-*reak-inside: avoid;
         margin: 0 0 4px 0 !important;
         padding: 6px 8px !important;
         width: 100%;
     }
-
-    body {
-        background: white;
-        font-size: 10pt;
-        margin: 0;
-    }
-}
-
-    /* Hide all recipes except selected */
-    .recipe {
-        display: none !important;
-    }
-
-    .recipe.print-show {
-        display: block !important;
-        break-inside: avoid;
-        page-break-inside: avoid;
-        margin-bottom: 10px;
-        margin: 0 0 4px 0 !important;
-        padding: 6px 8px !important;
-	width: 100%;
-    }
-
-    .recipe.print-show h2,    
-    .recipe.print-show h3,    
-.recipe.print-show ul {
-    margin: 4px 0 6px 18px !important;  /* restores natural spacing */
-    padding-left: 18px !important;      /* fixes bullet alignment */
-    list-style-position: outside;
-}
 
     body {
         background: white;
@@ -700,8 +670,6 @@ button:hover {
     </p>
 
 </div>
-
-<div id="recipeContainer">
 
 <div id="breakfast burrito" class="recipe">
     <h2>
