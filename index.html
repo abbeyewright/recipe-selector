@@ -217,7 +217,7 @@ button:hover {
     .recipe.print-show {
        display: block !important;
        break-inside: avoid;
-        page-*reak-inside: avoid;
+        page-break-inside: avoid;
         margin: 0 0 4px 0 !important;
         padding: 6px 8px !important;
         width: 100%;
@@ -2428,31 +2428,24 @@ const translations = {
 };
 
 function printSpanish() {
-    currentLanguage = "es";   // force Spanish
-
-    updateRecipeLanguage();   // apply Spanish text
+    currentLanguage = "es";
+    updateRecipeLanguage();
 
     const name = document.getElementById("customerName").value;
     document.getElementById("printName").innerText = name;
-
-    document.getElementById("printCount").innerText =
-        cart.length + " meals selected";
-
-    const order = ["breakfast", "lunch", "dinner"];
+    document.getElementById("printCount").innerText = cart.length + " meals selected";
 
     document.querySelectorAll('.recipe').forEach(r => {
         r.classList.remove('print-show');
     });
 
-    order.forEach(cat => {
-        cart.forEach(meal => {
-            if (mealCategory[meal] === cat) {
-                const el = document.getElementById(meal);
-                if (el) {
-                    el.classList.add("print-show");
-                }
-            }
-        });
+    cart.forEach(meal => {
+        const el = document.getElementById(meal);
+        if (el) {
+            el.classList.add('print-show');
+        } else {
+            console.warn("Missing recipe element for:", meal);
+        }
     });
 
     window.print();
@@ -2480,31 +2473,23 @@ function toggleMeal(meal, category, button) {
 }
 
 function printRecipes() {
-
     updateRecipeLanguage();
 
     const name = document.getElementById("customerName").value;
     document.getElementById("printName").innerText = name;
+    document.getElementById("printCount").innerText = cart.length + " meals selected";
 
-    document.getElementById("printCount").innerText =
-        cart.length + " meals selected";
-
-    // Remove all print classes first
     document.querySelectorAll('.recipe').forEach(r => {
         r.classList.remove('print-show');
     });
 
-    const order = ["breakfast", "lunch", "dinner"];
-
-    order.forEach(cat => {
-        cart.forEach(meal => {
-            if (mealCategory[meal] === cat) {
-                const el = document.getElementById(meal);
-                if (el) {
-                    el.classList.add("print-show");
-                }
-            }
-        });
+    cart.forEach(meal => {
+        const el = document.getElementById(meal);
+        if (el) {
+            el.classList.add('print-show');
+        } else {
+            console.warn("Missing recipe element for:", meal);
+        }
     });
 
     window.print();
@@ -2541,7 +2526,6 @@ function clearSelections() {
 
     // Hide all recipes
     document.querySelectorAll('.recipe').forEach(recipe => {
-        recipe.style.display = 'none';
         recipe.classList.remove('print-show');
     });
 
