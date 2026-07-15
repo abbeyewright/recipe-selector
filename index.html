@@ -261,6 +261,9 @@ button:hover {
         <input type="text" id="customerName" placeholder="Patron's name">
         <button class="print-btn" onclick="printRecipes()">Print</button>
     </div>
+<button class="lang-btn" onclick="toggleLanguage()" id="langBtn">
+    Español
+</button>
 </div>
 
 <div class="categories">
@@ -1506,8 +1509,86 @@ button:hover {
 </div>
 
 <script>
+let currentLanguage = "en";
 const cart = [];
 const mealCategory = {};
+
+const translations = {
+    "Egg Breakfast": "Desayuno de Huevos",
+    "Egg & Cheese Breakfast": "Desayuno de Huevos y Queso",
+    "Egg & Ham Breakfast": "Desayuno de Huevos y Jamón",
+    "Breakfast Burrito": "Burrito de Desayuno",
+    "Oatmeal": "Avena",
+    "Oatmeal with Raisins": "Avena con Pasas",
+    "Honey Nut O's with Milk": "Honey Nut O's con Leche",
+    "Raisin Bran with Milk": "Raisin Bran con Leche",
+    "Pancake or Waffle Breakfast": "Desayuno de Panqueques o Waffles",
+    "French Toast Breakfast": "Tostada Francesa",
+    "Peanut Butter Toast Breakfast": "Tostada de Mantequilla de Maní",
+    "Ham Sandwich": "Sándwich de Jamón",
+    "Tuna Sandwich": "Sándwich de Atún",
+    "Chicken Salad Sandwich": "Sándwich de Ensalada de Pollo",
+    "Peanut Butter & Jam Sandwich": "Sándwich de Mantequilla de Maní y Mermelada",
+    "Egg Salad Sandwich": "Sándwich de Ensalada de Huevo",
+    "Hot Dogs": "Perros Calientes",
+    "Chili Dogs": "Hot Dogs con chili",
+    "Cheese Quesadilla": "Quesadilla de Queso",
+    "Bean Quesadilla": "Quesadilla de Frijoles"
+    "Chicken and Cheese Quesadilla": "Quesadilla de pollo y queso",
+    "Beef Quesadilla": "Quesadilla de res",
+    "Baked Potato with Cheese and Beans": "Papa horneada con queso y frijoles",
+    "Spaghetti with Meat Sauce": "Espaguetis con salsa de carne",
+    "Spaghetti with Tomato Sauce": "Espaguetis con salsa de tomate",
+    "Macaroni & Cheese": "Macarrones con queso",
+    "Mac & Cheese with Hot Dogs": "Macarrones con queso con hot dogs",
+    "Mac & Cheese with Ham": "Macarrones con queso con jamón",
+    "Tuna Pasta": "Pasta con atún",
+    "Beef Stroganoff": "Estofado de res",
+    "Goulash": "Goulash",
+    "Chili Mac": "Chili mac",
+    "Beef Tacos": "Tacos de res",
+    "Chicken Tacos": "Tacos de pollo",
+    "Bean Tacos": "Tacos de frijoles",
+    "Beef Burritos": "Burritos de res",
+    "Chicken Burritos": "Burritos de pollo",
+    "Bean & Cheese Burritos": "Burritos de frijoles y queso",
+    "Beef Enchiladas": "Enchiladas de res",
+    "Beef Taco Salad": "Ensalada de tacos de res",
+    "Chicken Taco Salad": "Carne asada con papas",
+    "Roast Beef with Potatoes": "Carne asada con papas",
+    "Roast Chicken with Rice": "Pollo asado con arroz",
+    "Pork Roast with Potatoes": "Cerdo asado con papas",
+    "Pork Roast with Instant Potatoes": "Cerdo asado con papas instantáneas",
+    "Ham with Instant Potatoes": "Jamón con papas instantáneas",
+    "Hamburgers": "Hamburguesas",
+    "Sloppy Joes": "Sloppy Joes",
+    "Beef Stew and Rice": "Estofado de res con arroz",
+    "Chicken Noodle Soup": "Sopa de pollo con fideos",
+    "Chicken & Rice Soup": "Sopa de pollo con arroz",
+    "Tomato Soup with Grilled Cheese": "Sopa de tomate con sándwich de queso a la parrilla",
+    "Chili with Rice or Instant Potatoes": "Chili con arroz o papas instantáneas",
+    "Chicken & Rice Casserole": "Cazuela de pollo con arroz",
+    "Tuna Casserole": "Cazuela de atún",
+    "Hamburger Casserole": "Cazuela de hamburguesa",
+    "Potato Casserole": "Cazuela de papas",
+    "Shepherd's Pie": "Pastel de carne (shepherd’s pie)",
+    "Baked Potato with Chili": "Papa horneada con chili",
+    "Rice & Beans Meal": "Comida de arroz y frijoles",
+    "Chicken Stir Fry with Rice": "Salteado de pollo con arroz",
+    "Beef Stir Fry with Rice": "Salteado de res con arroz",
+    "Ground Beef & Potato Skillet": "Sartén de carne molida y papas",
+    "Sausage & Potato Skillet": "Sartén de salchicha y papas",
+    "Chicken & Rice Skillet": "Sartén de pollo y arroz"
+};
+
+function toggleLanguage() {
+    currentLanguage = (currentLanguage === "en") ? "es" : "en";
+
+    document.getElementById("langBtn").innerText =
+        (currentLanguage === "en") ? "Español" : "English";
+
+    updateRecipeLanguage();
+}
 
 function toggleMeal(meal, category, button) {
 
@@ -1526,12 +1607,9 @@ function toggleMeal(meal, category, button) {
 }
 
 function printRecipes() {
-
-    const order = ["breakfast", "lunch", "dinner"];
-
-    document.querySelectorAll('.recipe').forEach(r => {
-        r.classList.remove('print-show');
-    });
+    updateRecipeLanguage();  // ✅ ensure correct language shown
+    window.print();
+}
 
 document.getElementById("printCount").innerText =
     cart.length + " meals selected";
@@ -1594,6 +1672,23 @@ document.getElementById("printName").innerText = "";
     // Reset counter
     document.getElementById("count").innerText =
         "0 meals selected";
+}
+
+function updateRecipeLanguage() {
+    document.querySelectorAll(".recipe h2").forEach(h2 => {
+        const englishText = h2.dataset.en || h2.innerText;
+
+        // store original English text the first time
+        if (!h2.dataset.en) {
+            h2.dataset.en = englishText;
+        }
+
+        if (currentLanguage === "es" && translations[englishText]) {
+            h2.innerText = translations[englishText];
+        } else {
+            h2.innerText = h2.dataset.en;
+        }
+    });
 }
 
 function showRecipes() {
