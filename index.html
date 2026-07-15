@@ -261,8 +261,8 @@ button:hover {
         <input type="text" id="customerName" placeholder="Patron's name">
         <button class="print-btn" onclick="printRecipes()">Print</button>
     </div>
-<button class="lang-btn" onclick="toggleLanguage()" id="langBtn">
-    Español
+<button class="lang-btn" onclick="printSpanish()">
+    Spanish
 </button>
 </div>
 
@@ -1581,14 +1581,41 @@ const translations = {
     "Chicken & Rice Skillet": "Sartén de pollo y arroz"
 };
 
-function toggleLanguage() {
-    currentLanguage = (currentLanguage === "en") ? "es" : "en";
+function printSpanish() {
+    currentLanguage = "es";   // force Spanish
 
-    document.getElementById("langBtn").innerText =
-        (currentLanguage === "en") ? "Español" : "English";
+    updateRecipeLanguage();   // apply Spanish text
 
-    updateRecipeLanguage();
+    const name = document.getElementById("customerName").value;
+    document.getElementById("printName").innerText = name;
+
+    document.getElementById("printCount").innerText =
+        cart.length + " meals selected";
+
+    const order = ["breakfast", "lunch", "dinner"];
+
+    document.querySelectorAll('.recipe').forEach(r => {
+        r.classList.remove('print-show');
+    });
+
+    order.forEach(cat => {
+        cart.forEach(meal => {
+            if (mealCategory[meal] === cat) {
+                const el = document.getElementById(meal);
+                if (el) {
+                    el.classList.add("print-show");
+                }
+            }
+        });
+    });
+
+    window.print();
 }
+
+window.onafterprint = function () {
+    currentLanguage = "en";
+    updateRecipeLanguage();
+};
 
 function toggleMeal(meal, category, button) {
 
