@@ -75,7 +75,7 @@ button:hover {
 
 .top-bar {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     width: 100%;
 }
@@ -83,6 +83,7 @@ button:hover {
 .top-bar h1 {
     text-align: center;
     margin: 0;
+    justify-self: center;
 }
 
 #count {
@@ -153,6 +154,20 @@ button:hover {
     display: none;
 }
 
+.left-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.right-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
 .clear-btn {
     padding: 10px 15px;
     border: none;
@@ -221,13 +236,6 @@ button:hover {
         font-size: 10pt;
         margin: 0;
     }
-
-.left-group,
-.right-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
 }
 
 </style>
