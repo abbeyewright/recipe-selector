@@ -74,11 +74,15 @@ button:hover {
 }
 
 .top-bar {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    justify-content: space-between;
-    position: relative;
     width: 100%;
+}
+
+.top-bar h1 {
+    text-align: center;
+    margin: 0;
 }
 
 #count {
@@ -217,6 +221,13 @@ button:hover {
         font-size: 10pt;
         margin: 0;
     }
+
+.left-group,
+.right-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 }
 
 </style>
@@ -227,18 +238,17 @@ button:hover {
     Deseret Farms Food Pantry Recipes
 </div>
 <div class="top-bar">
-    <h3 id="count">0 meals selected</h3>
-
-    <button class="clear-btn" onclick="clearSelections()">
-        Clear All
-    </button>
+    <div class="left-group">
+        <h3 id="count">0 meals selected</h3>
+        <button class="clear-btn" onclick="clearSelections()">Clear All</button>
+    </div>
 
     <h1>Recipes</h1>
 
-    <div class="print-section">
+    <div class="right-group">
         <input type="text" id="customerName" placeholder="Patron's name">
         <button class="print-btn" onclick="printRecipes()">Print</button>
-	<button class="lang-btn" onclick="printSpanish()"> Spanish</button>
+        <button class="lang-btn" onclick="printSpanish()">Spanish</button>
     </div>
 </div>
 
