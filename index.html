@@ -74,12 +74,9 @@ button:hover {
 }
 
 .top-bar {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between; /* change this */
-    position: relative;         /* important */
-    gap: 15px;
-    flex-wrap: wrap;
     width: 100%;
 }
 
@@ -87,15 +84,15 @@ button:hover {
     margin: 0;
     font-size: 18px;
     font-weight: bold;
+    justify-self: start;
 }
 
 .top-bar h1 {
-    position: static;
-    left: 50%;
-    transform: none !important;
     margin: 0;
     font-size: 28px;
     text-align: center;
+    flex: 1;
+    justify-self: center;
 }
 
 .print-btn {
@@ -147,6 +144,7 @@ button:hover {
     align-items: center;
     gap: 10px;
     margin-left: auto;
+    justify-self: end;
 }
 
 #customerName {
